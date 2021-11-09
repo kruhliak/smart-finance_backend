@@ -14,7 +14,7 @@ const login = async (req, res) => {
   const token = user.createToken();
   await User.findByIdAndUpdate(_id, { token });
 
-  sendSuccessRes(res, { data: { token } }, 200);
+  sendSuccessRes(res, { data: { token, _id } }, 200);
 };
 
 module.exports = login;
