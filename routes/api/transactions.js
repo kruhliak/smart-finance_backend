@@ -17,4 +17,10 @@ router.post(
   controllerWrapper(ctrl.addTransaction)
 );
 
+router.get(
+  "/:operationType",
+  authenticate,
+  controllerWrapper(ctrl.getOperationByType)
+);
+
 module.exports = router;
