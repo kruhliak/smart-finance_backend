@@ -17,4 +17,16 @@ router.post(
   controllerWrapper(ctrl.addTransaction)
 );
 
+router.delete(
+  "/:operationId",
+  authenticate,
+  controllerWrapper(ctrl.removeById)
+);
+
+router.get(
+  "/:operationType",
+  authenticate,
+  controllerWrapper(ctrl.getOperationByType)
+);
+
 module.exports = router;

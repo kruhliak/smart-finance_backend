@@ -5,6 +5,14 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = Schema(
   {
+    balance: {
+      type: Number,
+      default: 0,
+    },
+    name: {
+      type: String,
+      default: "User",
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -49,6 +57,8 @@ userSchema.methods.createToken = function () {
 };
 
 const joiSchema = Joi.object({
+  balance: Joi.number(),
+  name: Joi.string(),
   email: Joi.string().required(),
   password: Joi.string().min(6).required(),
 });

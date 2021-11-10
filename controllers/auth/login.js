@@ -5,16 +5,17 @@ const { sendSuccessRes } = require("../../helpers");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email }, "_id email password verify");
+
+  const user = await User.findOne({ email });
   if (!user || !user.comparePassword(password)) {
     throw new BadRequest("Email or password is wrong");
   }
 
-  const { _id } = user;
+  const { _id, name, balance } = user;
   const token = user.createToken();
   await User.findByIdAndUpdate(_id, { token });
 
-  sendSuccessRes(res, { data: { token, _id } }, 200);
+  sendSuccessRes(res, { token, _id, name, balance }, 200);
 };
 
 module.exports = login;

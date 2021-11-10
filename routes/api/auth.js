@@ -18,5 +18,6 @@ router.post("/logout", authenticate, controllerWrapper(ctrl.logout));
 
 router.get("/current", authenticate, controllerWrapper(ctrl.currentUser));
 
-router.get("/verify/:verifyToken", controllerWrapper(ctrl.verify));
+router.post("/balance", authenticate, controllerWrapper(ctrl.addBalance));
+
 module.exports = router;
