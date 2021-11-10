@@ -3,9 +3,9 @@ const { sendSuccessRes } = require("../../helpers");
 
 const currentUser = async (req, res) => {
   const { _id } = req.user;
-  const result = await User.findOne({ _id }, "_id email");
+  const result = await User.findOne({ _id });
 
-  sendSuccessRes(res, { data: { result } }, 200);
+  sendSuccessRes(res, { result }, 200);
 };
 
 module.exports = currentUser;

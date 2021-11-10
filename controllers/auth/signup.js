@@ -5,7 +5,8 @@ const { User } = require("../../models");
 const { sendSuccessRes } = require("../../helpers");
 
 const signup = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
+
   const user = await User.findOne({ email });
   if (user) {
     throw new Conflict("Email in use");
@@ -13,7 +14,7 @@ const signup = async (req, res) => {
 
   const verifyToken = nanoid();
 
-  const newUser = new User({ email, verifyToken });
+  const newUser = new User({ email, verifyToken, name });
 
   newUser.setPassword(password);
 
