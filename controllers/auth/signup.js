@@ -1,5 +1,4 @@
 const { Conflict } = require("http-errors");
-const { nanoid } = require("nanoid");
 
 const { User } = require("../../models");
 const { sendSuccessRes } = require("../../helpers");
@@ -12,9 +11,7 @@ const signup = async (req, res) => {
     throw new Conflict("Email in use");
   }
 
-  const verifyToken = nanoid();
-
-  const newUser = new User({ email, verifyToken, name });
+  const newUser = new User({ email, name });
 
   newUser.setPassword(password);
 
