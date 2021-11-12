@@ -25,6 +25,15 @@ const transactionSchema = Schema(
       ref: "user",
       required: true,
     },
+    day: {
+      type: Number,
+    },
+    month: {
+      type: Number,
+    },
+    year: {
+      type: Number,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -34,6 +43,7 @@ const joiSchema = Joi.object({
   operation: Joi.string().required(),
   description: Joi.string().required(),
   value: Joi.number().required(),
+  date: Joi.string(),
 });
 
 const Transaction = model("transaction", transactionSchema);
