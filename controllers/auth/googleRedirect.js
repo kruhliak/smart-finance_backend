@@ -2,7 +2,7 @@ const queryString = require("query-string");
 const axios = require("axios");
 require("dotenv").config();
 const { User } = require("../../models");
-const { sendSuccessRes } = require("../../helpers");
+const login = require("./login");
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
@@ -27,9 +27,8 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  console.log(userData);
   //   userData: {
-  //   id: '117526688030707006499',
+  //   id: 'xxxxx',
   //   email: 'stanislav.kruhliak@gmail.com',
   //   verified_email: true,
   //   name: 'Stanislav Kruhliak',
@@ -43,10 +42,8 @@ const googleRedirect = async (req, res) => {
 
   if (!user) {
     const googleUser = new User({ email, name });
-    googleUser.setPassword(id);
     await googleUser.save();
   }
-
   return res.redirect(`${process.env.FRONTEND_URL}/`);
 };
 

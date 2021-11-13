@@ -6,7 +6,6 @@ const removeById = async (req, res) => {
   const { _id: UserId, balance } = req.user;
 
   const transaction = await Transaction.findById(operationId);
-  console.log(transaction);
 
   switch (transaction.operation) {
     case "income":
