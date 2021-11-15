@@ -9,11 +9,11 @@ const getOperationByYear = async (req, res) => {
     .filter((item) => item.operation === operationType)
     .filter((item) => item.year === Number(year));
 
-  const sum = filterYear.reduce((previousValue, item) => {
-    return previousValue + item.value;
-  }, 0);
+  // const sum = filterYear.reduce((previousValue, item) => {
+  //   return previousValue + item.value;
+  // }, 0);
 
-  sendSuccessRes(res, { sum, items: filterYear }, 200);
+  sendSuccessRes(res, { items: filterYear }, 200);
 };
 
 module.exports = getOperationByYear;
