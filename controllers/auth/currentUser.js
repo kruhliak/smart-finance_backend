@@ -5,7 +5,8 @@ const currentUser = async (req, res) => {
   const { _id } = req.user;
   const result = await User.findOne({ _id });
 
-  sendSuccessRes(res, { result }, 200);
+  const { name, balance, token } = result;
+  sendSuccessRes(res, { token, id: _id, name, balance }, 200);
 };
 
 module.exports = currentUser;

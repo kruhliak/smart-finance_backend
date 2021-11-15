@@ -37,13 +37,23 @@ const googleRedirect = async (req, res) => {
   //   picture: 'https://lh3.googleusercontent.com/a/AATXAJwsOBa-xhzqYO44fTAOJOYyWK3j-eLdXiMETXZ-=s96-c',
   //   locale: 'ru'
   // }
-  const { email, name, id } = userData.data;
+  const { email, name } = userData.data;
   const user = await User.findOne({ email });
 
   if (!user) {
     const googleUser = new User({ email, name });
     await googleUser.save();
   }
+  const { _id, balance } = user;
+  const token = user.createToken();
+  await User.findByIdAndUpdate(_id, { token });
+
+  res.status(200).json({
+    code: 200,
+    status: "success",
+    data: { token, id: _id, name, balance },
+  });
+
   return res.redirect(`${process.env.FRONTEND_URL}/`);
 };
 
