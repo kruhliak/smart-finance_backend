@@ -28,10 +28,11 @@ router.get(
   authenticate,
   controllerWrapper(ctrl.getOperationByType)
 );
+
 router.get(
-  "/:operationType/:month",
+  "/:operationType/:year",
   authenticate,
-  controllerWrapper(ctrl.getOperationByMonth)
+  controllerWrapper(ctrl.getOperationByYear)
 );
 
 module.exports = router;
