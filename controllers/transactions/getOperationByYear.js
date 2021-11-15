@@ -5,11 +5,9 @@ const getOperationByYear = async (req, res) => {
   const { operationType, year } = req.params;
   const data = await getAllTransactions(req);
 
-  const typeFilter = data.filter((item) => item.operation === operationType);
-  const filterYear = typeFilter.filter((item) => item.year === Number(year));
-
-  const month = filterYear.map((item) => {});
-  console.log(month);
+  const filterYear = data
+    .filter((item) => item.operation === operationType)
+    .filter((item) => item.year === Number(year));
 
   const sum = filterYear.reduce((previousValue, item) => {
     return previousValue + item.value;
