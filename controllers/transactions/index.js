@@ -1,13 +1,14 @@
 const addTransaction = require("./addTransaction");
-const getOperationByType = require("./getOperationByType");
 const removeById = require("./removeById");
-const getOperationByYear = require("./getOperationByYear");
-const getOperationByMonth = require("./getOperationByMonth");
+
+const getAllOperationByMonth = require("./getAllOperationByMonth");
+const getSummaryByYear = require("./getSummaryByYear");
+const getCategoriesByMonth = require("./getCategoriesByMonth");
 
 module.exports = {
   addTransaction,
-  getOperationByType,
   removeById,
-  getOperationByYear,
-  getOperationByMonth,
+  getAllOperationByMonth,
+  getSummaryByYear,
+  getCategoriesByMonth,
 };

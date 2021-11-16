@@ -24,21 +24,16 @@ router.delete(
 );
 
 router.get(
-  "/:operationType",
+  "/:year/:month",
   authenticate,
-  controllerWrapper(ctrl.getOperationByType)
+  controllerWrapper(ctrl.getAllOperationByMonth)
 );
-
-router.get(
-  "/:operationType/:year",
-  authenticate,
-  controllerWrapper(ctrl.getOperationByYear)
-);
+router.get("/:year", authenticate, controllerWrapper(ctrl.getSummaryByYear));
 
 router.get(
   "/:operationType/:year/:month",
   authenticate,
-  controllerWrapper(ctrl.getOperationByMonth)
+  controllerWrapper(ctrl.getCategoriesByMonth)
 );
 
 module.exports = router;
