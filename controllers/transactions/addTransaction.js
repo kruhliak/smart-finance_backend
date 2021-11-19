@@ -3,7 +3,7 @@ const { sendSuccessRes } = require("../../helpers");
 
 const addTransaction = async (req, res) => {
   const { _id: UserId, balance } = req.user;
-  const { operation, value, date } = req.body;
+  const { operation, value, date, description } = req.body;
 
   switch (operation) {
     case "income":
@@ -17,7 +17,6 @@ const addTransaction = async (req, res) => {
   }
 
   const addDate = new Date(date);
-
   const day = addDate.getDate();
   const month = addDate.getMonth() + 1;
   //-------------
@@ -26,6 +25,7 @@ const addTransaction = async (req, res) => {
   const year = addDate.getFullYear();
 
   await User.findByIdAndUpdate(UserId, { balance: neWBallance });
+  const lowerDescription = description.toLowerCase();
 
   const newTransaction = new Transaction({
     ...req.body,
@@ -33,7 +33,9 @@ const addTransaction = async (req, res) => {
     day,
     month,
     year,
+    description: lowerDescription,
   });
+
   await newTransaction.save();
   const id = newTransaction._id;
 
