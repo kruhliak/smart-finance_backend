@@ -1,9 +1,7 @@
 const { Transaction } = require("../models");
 
-const getAllTransactions = async (req, res) => {
-  const { _id: ownerId } = req.user;
-
-  const data = await Transaction.find({ owner: ownerId });
+const getAllTransactions = async (params) => {
+  const data = await Transaction.find(params);
   return data;
 };
 

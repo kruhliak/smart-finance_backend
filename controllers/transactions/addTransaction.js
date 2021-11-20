@@ -19,12 +19,10 @@ const addTransaction = async (req, res) => {
   const addDate = new Date(date);
   const day = addDate.getDate();
   const month = addDate.getMonth() + 1;
-  //-------------
-  // const month = addDate.toLocaleString("default", { month: "long" }); month name
-  //-------------
   const year = addDate.getFullYear();
 
   await User.findByIdAndUpdate(UserId, { balance: neWBallance });
+
   const lowerDescription = description.toLowerCase();
 
   const newTransaction = new Transaction({

@@ -3,15 +3,18 @@ const { getAllTransactions } = require("../../services");
 
 const getCategoriesByMonth = async (req, res) => {
   const { year, month, operationType } = req.params;
-  const data = await getAllTransactions(req);
 
-  const filter = data
-    .filter((item) => item.year === Number(year))
-    .filter((item) => item.month === Number(month))
-    .filter((item) => item.operation === operationType);
+  const { _id } = req.user;
+
+  const data = await getAllTransactions({
+    owner: _id,
+    month,
+    year,
+    operationType,
+  });
 
   let result = Object.values(
-    filter.reduce((prev, next) => {
+    data.reduce((prev, next) => {
       if (!prev[next.category]) {
         prev[next.category] = {
           category: next.category,
@@ -19,6 +22,7 @@ const getCategoriesByMonth = async (req, res) => {
           list: [],
         };
       }
+
       prev[next.category].list.push(next);
       prev[next.category].sum += next.value;
       return prev;
