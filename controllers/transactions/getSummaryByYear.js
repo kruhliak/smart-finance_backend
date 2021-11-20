@@ -3,12 +3,15 @@ const { getAllTransactions } = require("../../services");
 
 const getSummaryByYear = async (req, res) => {
   const { year } = req.params;
-  const data = await getAllTransactions(req);
+  const { _id } = req.user;
 
-  const filterYear = data.filter((item) => item.year === Number(year));
+  const data = await getAllTransactions({
+    owner: _id,
+    year,
+  });
 
   let month = Object.values(
-    filterYear.reduce((prev, next) => {
+    data.reduce((prev, next) => {
       if (!prev[next.month]) {
         prev[next.month] = {
           month: next.month,

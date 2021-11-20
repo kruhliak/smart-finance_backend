@@ -3,6 +3,7 @@ const { sendSuccessRes } = require("../../helpers");
 
 const currentUser = async (req, res) => {
   const { _id } = req.user;
+
   const result = await User.findOne({ _id });
 
   const { name, balance, token } = result;
