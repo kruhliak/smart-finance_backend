@@ -10,8 +10,9 @@ const getCategoriesByMonth = async (req, res) => {
     owner: _id,
     month,
     year,
-    operationType,
+    operation: operationType,
   });
+  console.log("data>>>", data);
 
   let result = Object.values(
     data.reduce((prev, next) => {
@@ -28,6 +29,7 @@ const getCategoriesByMonth = async (req, res) => {
       return prev;
     }, {})
   );
+  console.log("result>>>", result);
 
   sendSuccessRes(res, result, 200);
 };
