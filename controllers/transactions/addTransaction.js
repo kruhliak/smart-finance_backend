@@ -7,10 +7,10 @@ const addTransaction = async (req, res) => {
 
   switch (operation) {
     case "income":
-      neWBallance = balance + value;
+      neWBallance = Number(balance) + Number(value);
       break;
     case "expense":
-      neWBallance = balance - value;
+      neWBallance = Number(balance) - Number(value);
       break;
     default:
       balance;
