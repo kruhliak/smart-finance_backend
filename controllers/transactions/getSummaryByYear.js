@@ -15,16 +15,18 @@ const getSummaryByYear = async (req, res) => {
       if (!prev[next.month]) {
         prev[next.month] = {
           month: next.month,
-          sum: 0,
+          year: next.year,
+          sumIncome: 0,
+          sumExpense: 0,
         };
       }
 
       switch (next.operation) {
         case "income":
-          prev[next.month].sum += next.value;
+          prev[next.month].sumIncome += next.value;
           break;
         case "expense":
-          prev[next.month].sum -= next.value;
+          prev[next.month].sumExpense += next.value;
           break;
         default:
           0;
