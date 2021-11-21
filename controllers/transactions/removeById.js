@@ -26,7 +26,7 @@ const removeById = async (req, res) => {
     throw new NotFound(`Transaction with id=${operationId} not found`);
   }
 
-  sendSuccessRes(res, { message: "Success delete" });
+  sendSuccessRes(res, { message: "Success delete", id: operationId });
 };
 
 module.exports = removeById;
